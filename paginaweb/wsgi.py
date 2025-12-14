@@ -8,29 +8,42 @@ https://docs.djangoproject.com/en/6.0/howto/deployment/wsgi/
 """
 
 import os
+import django
 from django.core.wsgi import get_wsgi_application
 
 # 📌 Indicamos a Django qué archivo de settings usar
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'paginaweb.settings')
 
-# 🚀 Crear la aplicación WSGI
-application = get_wsgi_application()
+# 🔧 Inicializamos Django
+django.setup()
 
 # ==============================
 # ⚙️ SOLO PARA RENDER (FREE)
 # ==============================
 if os.environ.get("RENDER"):
 
-    # 🔧 Ejecutar migraciones automáticamente
+    from django.core.management import call_command
+
+    # 🗄️ Ejecutar migraciones
     try:
-        from django.core.management import call_command
         call_command('migrate', interactive=False)
-        print("Migraciones aplicadas correctamente")
+        print("✔ Migraciones aplicadas correctamente")
     except Exception as e:
-        print("Aviso al ejecutar migrate:", e)
+        print("⚠ Aviso migrate:", e)
+
+    # 🎨 Recolectar archivos estáticos (ADMIN CSS)
+    try:
+        call_command('collectstatic', interactive=False, clear=True)
+        print("✔ Static files recolectados")
+    except Exception as e:
+        print("⚠ Aviso collectstatic:", e)
 
     # 👤 Crear superusuario automático
     try:
         import createsuperuser_render
+        print("✔ Superusuario verificado/creado")
     except Exception as e:
-        print("Aviso al crear superusuario:", e)
+        print("⚠ Aviso superusuario:", e)
+
+# 🚀 Crear la aplicación WSGI (AL FINAL)
+application = get_wsgi_application()
