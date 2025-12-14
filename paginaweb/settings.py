@@ -121,3 +121,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+
+
+
+
+
+
+import os
+
+RENDER = os.environ.get("RENDER", None)
+
+if RENDER:
+    DEBUG = False
