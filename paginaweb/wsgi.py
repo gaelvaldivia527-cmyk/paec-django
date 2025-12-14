@@ -31,6 +31,13 @@ if os.environ.get("RENDER"):
     except Exception as e:
         print("⚠ Aviso migrate:", e)
 
+    # 🌱 Cargar datos iniciales (PLANTAS)
+    try:
+        call_command('loaddata', 'plantas', verbosity=0)
+        print("✔ Plantas cargadas desde fixture")
+    except Exception as e:
+        print("⚠ Aviso loaddata:", e)
+
     # 🎨 Recolectar archivos estáticos (ADMIN CSS)
     try:
         call_command('collectstatic', interactive=False, clear=True)
