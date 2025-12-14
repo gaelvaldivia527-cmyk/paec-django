@@ -1,0 +1,186 @@
+{% load static %}  
+<!-- Carga el sistema de archivos estáticos de Django (imágenes, CSS, JS si se usaran) -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración de caracteres para aceptar acentos y símbolos -->
+    <meta charset="UTF-8">
+
+    <!-- Ajusta la página para dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título que aparece en la pestaña del navegador -->
+    <title>Pedir Plantas</title>
+
+    <!-- =========================
+         ESTILOS CSS DE LA PÁGINA
+         ========================= -->
+    <style>
+        /* Estilo general del cuerpo de la página */
+        body {
+            font-family: Arial, sans-serif; /* Tipo de letra */
+            background-image: url('https://axenthost.com/img/articles/minecraft-cherry-blossom/minecraft-cherry-blossom-biome.webp'); /* Imagen de fondo */
+            background-size: cover; /* Ajusta la imagen a toda la pantalla */
+            background-repeat: no-repeat; /* Evita que se repita la imagen */
+            background-attachment: fixed; /* Fija la imagen al fondo */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Contenedor principal del formulario */
+        .contenedor {
+            width: 90%; /* Ancho adaptable */
+            max-width: 600px; /* Ancho máximo */
+            margin: 40px auto; /* Centra el contenedor */
+            padding: 25px; /* Espacio interno */
+            background: rgba(255, 255, 255, 0.45); /* Fondo semitransparente */
+            backdrop-filter: blur(6px); /* Efecto de desenfoque */
+            border-radius: 12px; /* Bordes redondeados */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.25); /* Sombra */
+        }
+
+        /* Título principal */
+        h1 {
+            text-align: center; /* Centra el texto */
+            margin-bottom: 20px; /* Separación inferior */
+            color: #333; /* Color del texto */
+            text-shadow: 1px 1px 2px white; /* Sombra clara */
+        }
+
+        /* Etiquetas de los campos */
+        label {
+            font-weight: bold; /* Texto en negritas */
+            margin-top: 12px; /* Separación superior */
+            display: block; /* Hace que cada label esté en su propia línea */
+            color: #444;
+            text-shadow: 1px 1px 2px white;
+        }
+
+        /* Estilos para inputs y selects */
+        select, input {
+            width: 100%; /* Ocupan todo el ancho */
+            padding: 10px; /* Tamaño interno */
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #888;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(3px);
+        }
+
+        /* Botón de envío */
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #4CAF50; /* Color verde */
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* Efecto al pasar el mouse sobre el botón */
+        button:hover {
+            background: #3f8e44;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- CONTENEDOR DEL FORMULARIO -->
+    <div class="contenedor">
+        <!-- Título del formulario -->
+        <h1>Solicitar Plantas</h1>
+
+        <!-- Formulario que envía datos al servidor usando POST -->
+        <form method="POST">
+
+            <!-- Token de seguridad obligatorio en Django -->
+            {% csrf_token %}
+
+            <!-- Campo para el nombre del solicitante -->
+            <label for="nombre">Tu Nombre:</label>
+            <input type="text" name="nombre" required>
+
+            <!-- Campo opcional para la localidad -->
+            <label for="localidad">Tu Localidad:</label>
+            <input type="text" name="localidad">
+
+            <!-- Selector del tipo de planta -->
+            <label for="tipo">Tipo de Planta:</label>
+            <select name="tipo" id="tipo" required>
+                <option value="">Selecciona un tipo</option>
+                <option value="maderable">Maderables</option>
+                <option value="sombra">Sombra</option>
+                <option value="frutal">Frutales</option>
+            </select>
+
+            <!-- Selector de planta específica -->
+            <label for="planta">Planta:</label>
+            <select name="planta" id="planta" required>
+                <option value="">Selecciona un tipo primero</option>
+
+                <!-- Recorre todas las plantas enviadas desde Django -->
+                {% for planta in plantas %}
+                    <option 
+                        value="{{ planta.id }}" 
+                        data-tipo="{{ planta.tipo|lower }}">
+                        {{ planta.nombre }} — Disponible: {{ planta.cantidad_disponible }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <!-- Campo para ingresar la cantidad solicitada -->
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" name="cantidad" min="1" required>
+
+            <!-- Botón para enviar el formulario -->
+            <button type="submit">Enviar Solicitud</button>
+        </form>
+    </div>
+
+    <!-- =========================
+         JAVASCRIPT PARA FILTRAR PLANTAS
+         ========================= -->
+    <script>
+        // Obtiene el selector del tipo de planta
+        const tipoSelect = document.getElementById("tipo");
+
+        // Obtiene el selector de plantas
+        const plantaSelect = document.getElementById("planta");
+
+        // Guarda todas las opciones originales del select de plantas
+        const opcionesOriginales = Array.from(plantaSelect.options);
+
+        // Detecta cuando cambia el tipo de planta
+        tipoSelect.addEventListener("change", function () {
+
+            // Obtiene el tipo seleccionado
+            const tipo = tipoSelect.value.toLowerCase();
+
+            // Limpia las opciones actuales
+            plantaSelect.innerHTML = "";
+
+            // Agrega la opción inicial
+            plantaSelect.appendChild(new Option("Selecciona una planta", ""));
+
+            // Recorre las opciones originales
+            opcionesOriginales.forEach(opt => {
+
+                // Ignora opciones sin tipo definido
+                if (!opt.dataset.tipo) return;
+
+                // Muestra solo las plantas que coinciden con el tipo seleccionado
+                if (opt.dataset.tipo === tipo) {
+                    plantaSelect.appendChild(opt.cloneNode(true));
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

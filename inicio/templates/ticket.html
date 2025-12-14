@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configura la codificación para aceptar acentos y caracteres especiales -->
+    <meta charset="UTF-8">
+
+    <!-- Título que aparece en la pestaña del navegador -->
+    <title>Ticket de Pedido</title>
+
+    <!-- ESTILOS INTERNOS DEL TICKET -->
+    <style>
+        /* Estilo general del fondo de la página */
+        body {
+            background: #f3f3f3;          /* Color gris claro */
+            font-family: Arial, sans-serif; /* Fuente general */
+            padding: 40px;               /* Espacio interno */
+        }
+
+        /* Contenedor principal del ticket */
+        .ticket-box {
+            width: 60%;                  /* Ancho del ticket */
+            margin: auto;                /* Centrado horizontal */
+            background: white;           /* Fondo blanco */
+            padding: 25px;               /* Espaciado interno */
+            border-radius: 10px;         /* Bordes redondeados */
+            box-shadow: 0px 0px 10px #ccc; /* Sombra */
+            font-size: 18px;              /* Tamaño del texto */
+        }
+
+        /* Título del ticket */
+        h2 {
+            text-align: center;          /* Centra el texto */
+            margin-bottom: 20px;         /* Espacio inferior */
+        }
+
+        /* Botón para volver a pedir plantas */
+        .btn-volver {
+            display: block;              /* Se comporta como bloque */
+            width: 150px;                /* Ancho fijo */
+            margin: 25px auto;           /* Centrado */
+            padding: 10px;               /* Espaciado interno */
+            background: #4CAF50;         /* Verde */
+            text-align: center;           /* Texto centrado */
+            color: white;                /* Texto blanco */
+            border-radius: 8px;          /* Bordes redondeados */
+            text-decoration: none;       /* Quita subrayado */
+        }
+    </style>
+
+</head>
+<body>
+
+<!-- CONTENEDOR DEL TICKET -->
+<div class="ticket-box">
+
+    <!-- Título principal -->
+    <h2>✔ Ticket de Pedido</h2>
+
+    <!-- DATOS RECIBIDOS DESDE EL FORMULARIO "PEDIR PLANTAS" -->
+    <!-- Estas variables vienen del backend (Django) -->
+
+    <p><strong>Nombre:</strong> {{ nombre }}</p>
+    <!-- Nombre ingresado por el usuario -->
+
+    <p><strong>Localidad:</strong> {{ localidad }}</p>
+    <!-- Localidad ingresada en el formulario -->
+
+    <p><strong>Planta solicitada:</strong> {{ planta }}</p>
+    <!-- Nombre de la planta seleccionada -->
+
+    <p><strong>Cantidad:</strong> {{ cantidad }}</p>
+    <!-- Cantidad solicitada por el usuario -->
+
+    <p><strong>Existencias restantes:</strong> {{ restantes }}</p>
+    <!-- Cantidad de plantas que quedan después del pedido -->
+
+    <br>
+    <hr>
+
+    <!-- Mensaje final -->
+    <p style="text-align:center;">
+        Gracias por participar en la reforestación 🌱
+    </p>
+
+</div>
+
+<!-- BOTÓN PARA REGRESAR AL FORMULARIO DE PEDIR PLANTAS -->
+<a class="btn-volver" href="/pedir-plantas/">
+    Volver
+</a>
+
+</body>
+</html>

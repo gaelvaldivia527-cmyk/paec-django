@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<!-- Documento HTML5 que muestra información sobre árboles de la región -->
+<html lang="es">
+<head>
+    <!-- Configuración de caracteres en español -->
+    <meta charset="UTF-8">
+
+    <!-- Ajusta el diseño para pantallas de celular y computadora -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título que aparece en la pestaña del navegador -->
+    <title>Árboles de la Región</title>
+
+    <!-- Enlace a la librería Font Awesome para usar íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Estilos internos para el diseño visual de la página -->
+    <style>
+        /* Estilo general del cuerpo de la página */
+        body {
+            font-family: "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f6f9;
+            color: #333;
+        }
+
+        /* Encabezado principal */
+        header {
+            background: #2c7a3f;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Contenedor central para el contenido */
+        .contenedor {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        /* Títulos de cada sección */
+        h2 {
+            margin-top: 40px;
+            color: #2c7a3f;
+            font-size: 26px;
+        }
+
+        /* Diseño en forma de cuadrícula adaptable */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* Tarjetas individuales para cada árbol */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        /* Efecto visual al pasar el cursor sobre una tarjeta */
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Íconos dentro de las tarjetas */
+        .card i {
+            font-size: 32px;
+            color: #2c7a3f;
+            margin-bottom: 10px;
+        }
+
+        /* Títulos de cada árbol */
+        .card h3 {
+            margin: 0;
+            margin-bottom: 10px;
+            color: #145725;
+        }
+
+        /* Botón para regresar a la página principal */
+        .volver {
+            display: block;
+            width: 180px;
+            text-align: center;
+            margin: 60px auto;
+            padding: 12px;
+            font-size: 18px;
+            text-decoration: none;
+            background: #2c7a3f;
+            color: white;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        /* Cambio de color al pasar el cursor sobre el botón */
+        .volver:hover {
+            background: #256a36;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Encabezado principal visible -->
+<header>
+    🌳 Árboles Comunes de la Región Huasteca
+</header>
+
+<!-- Contenedor general del contenido -->
+<div class="contenedor">
+
+    <!-- ============================= -->
+    <!-- SECCIÓN: ÁRBOLES MADERABLES -->
+    <!-- ============================= -->
+    <h2>🌲 Árboles Maderables</h2>
+
+    <!-- Cuadrícula de tarjetas -->
+    <div class="grid">
+
+        <!-- Tarjeta individual de árbol -->
+        <div class="card">
+            <i class="fa-solid fa-tree"></i>
+            <h3>Cedro rojo</h3>
+            <p>Madera fina y aromática, ideal para muebles e instrumentos. Crece entre 20 y 30 m y prefiere climas tropicales húmedos.</p>
+        </div>
+
+        <!-- Se repite la misma estructura para cada árbol -->
+        <div class="card">
+            <i class="fa-solid fa-tree"></i>
+            <h3>Caoba</h3>
+            <p>Una madera rojiza de lujo. Árbol de hasta 40 m, resistente y de sombra amplia.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-tree"></i>
+            <h3>Pino</h3>
+            <p>Conífera resistente usada para construcción y resinas.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-tree"></i>
+            <h3>Encino</h3>
+            <p>Árbol longevo de madera dura y gran valor ecológico.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-tree"></i>
+            <h3>Palo mulato</h3>
+            <p>Tronco rojizo y crecimiento rápido.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-tree"></i>
+            <h3>Huanacaxtle</h3>
+            <p>Árbol grande de copa extensa.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-tree"></i>
+            <h3>Ceiba</h3>
+            <p>Árbol sagrado de gran tamaño.</p>
+        </div>
+
+    </div>
+
+    <!-- ============================= -->
+    <!-- SECCIÓN: ÁRBOLES DE SOMBRA -->
+    <!-- ============================= -->
+    <h2>🌳 Árboles de Sombra y Ornato</h2>
+
+    <div class="grid">
+        <div class="card">
+            <i class="fa-solid fa-seedling"></i>
+            <h3>Ramón</h3>
+            <p>Árbol resistente y excelente sombra.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-seedling"></i>
+            <h3>Amate</h3>
+            <p>Reconocido por sus raíces aéreas.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-seedling"></i>
+            <h3>Guácima</h3>
+            <p>Árbol medicinal muy común.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-seedling"></i>
+            <h3>Ojite</h3>
+            <p>Madera clara con aroma característico.</p>
+        </div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- SECCIÓN: ÁRBOLES FRUTALES -->
+    <!-- ============================= -->
+    <h2>🍊 Árboles Frutales</h2>
+
+    <div class="grid">
+        <!-- Tarjetas de árboles frutales -->
+        <div class="card">
+            <i class="fa-solid fa-apple-whole"></i>
+            <h3>Mango</h3>
+            <p>Fruto dulce y aromático.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-lemon"></i>
+            <h3>Cítricos</h3>
+            <p>Naranja, limón y mandarina.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-apple-whole"></i>
+            <h3>Guayaba</h3>
+            <p>Produce fruta casi todo el año.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-avocado"></i>
+            <h3>Aguacate oloroso</h3>
+            <p>Fruto nutritivo y sabroso.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-lemon"></i>
+            <h3>Tamarindo</h3>
+            <p>Resistente a sequía.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-apple-whole"></i>
+            <h3>Mamey</h3>
+            <p>Fruto dulce y energético.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-seedling"></i>
+            <h3>Papaya</h3>
+            <p>Crece rápido y es fácil de cuidar.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-seedling"></i>
+            <h3>Plátano</h3>
+            <p>Produce durante todo el año.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-lemon"></i>
+            <h3>Maracuyá</h3>
+            <p>Enredadera tropical muy productiva.</p>
+        </div>
+    </div>
+
+    <!-- Botón para regresar a la página principal -->
+    <a href="/" class="volver">⬅ Volver</a>
+
+</div>
+
+</body>
+</html>

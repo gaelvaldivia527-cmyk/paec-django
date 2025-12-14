@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!-- Documento HTML que crea una calculadora de distancias de siembra -->
+<html>
+<head>
+    <!-- Título que aparece en la pestaña del navegador -->
+    <title>Calculadora de Distancias</title>
+
+    <!-- Estilos CSS para el diseño visual -->
+    <style>
+        /* Estilo general de la página */
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #eef5ea;
+
+            /* Imagen de fondo fija */
+            background-image: url("https://wallpapers.com/images/high/beautiful-minecraft-cherry-blossoms-8zlaxmeiqm93j24f.webp");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            color: #2d472c;
+        }
+
+        /* Título principal */
+        h1 {
+            margin-top: 20px;
+            font-size: 32px;
+            text-shadow: 1px 1px 2px #fff;
+        }
+
+        /* Texto descriptivo */
+        p {
+            font-size: 16px;
+            color: #3b5939;
+        }
+
+        /* Contenedor del formulario */
+        fieldset {
+            background: white;
+            border: 2px solid #4c7c4f;
+            border-radius: 10px;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* Título del fieldset */
+        legend {
+            background: #4c7c4f;
+            padding: 8px 14px;
+            border-radius: 6px;
+            color: white;
+            font-size: 18px;
+        }
+
+        /* Tabla del formulario */
+        table {
+            width: 100%;
+        }
+
+        /* Campos de entrada */
+        input {
+            width: 95%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #7aa87e;
+            background: #f6fff5;
+        }
+
+        /* Botón de cálculo */
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background: #4c7c4f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            transition: 0.2s;
+        }
+
+        /* Efecto al pasar el cursor */
+        button:hover {
+            background: #3d6a40;
+            transform: scale(1.05);
+        }
+
+        /* Línea divisoria */
+        hr {
+            width: 90%;
+            max-width: 700px;
+            border: 1px solid #c9dec9;
+            margin: 25px auto;
+        }
+
+        /* Título de resultados */
+        h2 {
+            text-align: center;
+            font-size: 26px;
+            color: #365b37;
+            text-shadow: 1px 1px 2px #fff;
+        }
+
+        /* Área donde se muestran los resultados */
+        pre {
+            background: #f0f9ef;
+            border: 1px solid #c0d9c0;
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        /* Botón para regresar */
+        .btn-regresar {
+            display: block;
+            width: 250px;
+            margin: 30px auto 40px auto;
+            padding: 12px;
+            text-align: center;
+            background: #4c7c4f;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: 0.3s;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+
+        /* Efecto hover del botón regresar */
+        .btn-regresar:hover {
+            background: #3d6a40;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Encabezado centrado -->
+<center>
+    <h1 style="color:white; text-shadow:2px 2px 6px black;">
+        🌱 Calculadora de Distancias de Siembra 🌱
+    </h1>
+
+    <!-- Descripción del funcionamiento -->
+    <p style="color:white; text-shadow:1px 1px 4px black;">
+        <b>
+        Ingresa los datos y obtén la distribución recomendada, dimensiones del terreno<br>
+        y un esquema visual de cómo deben quedar las plantas.
+        </b>
+    </p>
+</center>
+
+<hr>
+
+<!-- Formulario de entrada de datos -->
+<fieldset>
+    <legend><b>📋 Datos de siembra</b></legend>
+
+    <!-- Al enviar el formulario se ejecuta la función calcular() -->
+    <form onsubmit="event.preventDefault(); calcular();">
+        <table>
+            <tr>
+                <td><b>Cantidad de plantas:</b></td>
+                <td>
+                    <input type="number" id="plantas" min="1" max="1000" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Distancia entre plantas (m):</b></td>
+                <td>
+                    <input type="number" id="dist_planta" step="0.1" min="0.1" max="100" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Distancia entre hileras (m):</b></td>
+                <td>
+                    <input type="number" id="dist_hilera" step="0.1" min="0.1" max="100" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <button type="submit">CALCULAR</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</fieldset>
+
+<hr>
+
+<!-- Título de resultados -->
+<h2 style="color:white; text-shadow:2px 2px 6px black;">
+    📌 RESULTADOS
+</h2>
+
+<!-- Área donde se muestran los resultados -->
+<fieldset>
+    <legend><b>Información generada</b></legend>
+    <pre id="resultado" style="font-size: 15px; font-family: Consolas;"></pre>
+</fieldset>
+
+<!-- Botón para regresar a la página principal -->
+<a href="{% url 'inicio' %}" class="btn-regresar">⬅ Regresar al inicio</a>
+
+<!-- Código JavaScript -->
+<script>
+/* Función principal que realiza los cálculos */
+function calcular() {
+
+    // Obtener valores ingresados por el usuario
+    let plantas = parseInt(document.getElementById("plantas").value);
+    let dp = parseFloat(document.getElementById("dist_planta").value);
+    let dh = parseFloat(document.getElementById("dist_hilera").value);
+
+    // Validación de cantidad máxima
+    if (plantas > 1000) {
+        alert("❌ No puedes ingresar más de 1000 plantas.");
+        return;
+    }
+
+    // Validación de valores positivos
+    if (plantas <= 0 || dp <= 0 || dh <= 0) {
+        alert("❌ Los valores deben ser mayores a cero.");
+        return;
+    }
+
+    // Cálculo de filas y columnas recomendadas
+    let columnas = Math.ceil(Math.sqrt(plantas));
+    let filas = Math.ceil(plantas / columnas);
+
+    // Dimensiones del terreno
+    let ancho = (columnas - 1) * dp;
+    let largo = (filas - 1) * dh;
+    let area = ancho * largo;
+
+    // Variable para el dibujo ASCII
+    let dibujo = "";
+
+    // Generar esquema visual de las plantas
+    for (let f = 0; f < filas; f++) {
+        for (let c = 0; c < columnas; c++) {
+            dibujo += "[X]";
+            if (c < columnas - 1) dibujo += "---" + dp + "m---";
+        }
+        dibujo += "\n";
+
+        if (f < filas - 1) {
+            for (let c = 0; c < columnas; c++) {
+                dibujo += " | ";
+                if (c < columnas - 1) dibujo += "           ";
+            }
+            dibujo += "\n";
+
+            for (let c = 0; c < columnas; c++) {
+                dibujo += dh + "m";
+                if (c < columnas - 1) dibujo += "         ";
+            }
+            dibujo += "\n";
+
+            for (let c = 0; c < columnas; c++) {
+                dibujo += " | ";
+                if (c < columnas - 1) dibujo += "           ";
+            }
+            dibujo += "\n";
+        }
+    }
+
+    // Mostrar resultados en pantalla
+    document.getElementById("resultado").textContent =
+        "🌱 Cantidad de plantas: " + plantas + "\n" +
+        "🌾 Filas sugeridas: " + filas + "\n" +
+        "🌾 Columnas sugeridas: " + columnas + "\n" +
+        "📏 Ancho del terreno: " + ancho.toFixed(2) + " m\n" +
+        "📏 Largo del terreno: " + largo.toFixed(2) + " m\n" +
+        "📐 Área mínima necesaria: " + area.toFixed(2) + " m²\n\n" +
+        "📍 Distribución sugerida:\n\n" +
+        dibujo;
+}
+</script>
+
+</body>
+</html>
